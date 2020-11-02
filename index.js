@@ -70,20 +70,54 @@ Parameters:
  * callback function getYears
  */
 
-function getWinnersByYear(getWinners, getYears) {
-        
-};
 
-getWinnersByYear();
+
+function getWinnersByYear(data, callback1, callback2)                  // function declaration using callback functions as parameters
+{
+    let finalsArray = getFinals(data);
+    let dates = callback1(finalsArray);                                 // array of years numbers
+    //console.log(years);
+    let winners = callback2(finalsArray);
+    //console.log(winners);                                             // array of winner strings
+    let winnerStatement = dates.map((year, i) =>                        //.map //SYNTAX:   let newArray = arr.map(callback(currentValue[, index[, array]]) {}
+    {
+         let winnerName = winners[i];
+         console.log(`In ${year}, ${winnerName} won the world cup!`)    //required output statement
+    })                                                                 // closing arrow function
+    return winnerStatement;
+};
+//TEST CODE�
+getWinnersByYear(fifaData, getYears, getWinners);
+      
+    // let arr = getFinals(data);
+
+    // let yrs = getYears(arr);
+    // console.log(yrs);
+
+    // let win = getWinners(arr);
+    // console.log(win);
+
+
+    // return `"In ${getYears}, ${getWinners} won the world cup!"`
+   
+
+      
+
+
+// console.log(getWinnersByYear());
 
 /* Task 6: Write a function called `getAverageGoals` that accepts a parameter `data` and returns the the average number of home team goals and away team goals scored per match (Hint: use .reduce and do this in 2 steps) */
 
 function getAverageGoals(getFinals) {
     let averageG = getFinals
-    .map (tGoals => tGoals['Home Team Goals'] + tGoals['Away Team Goals'])
-    .reduce((total, goals) => total + goals, 0)  
-    
-    console.log(averageG)
+    .map (tGoals => (tGoals['Home Team Goals']/19))
+    .reduce((total, goals) => (total + goals), 0)  
+    console.log(Math.round(averageG))
+
+    // let averageG2 = getFinals
+    // .map (t2Goals => t2Goals['Away Team Goals']/19)
+    // .reduce((total1 + goals1) => (total1 + goals1), 0)
+    // console.log(averageG2)
 
 };
 
